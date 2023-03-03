@@ -2,15 +2,74 @@ const { Router } = require("express");
 const router = Router();
 
 const { getAllInfo } = require("../controllers/gettingAllInfo");
-const { Dog } = require("../db");
+const { Dog, Temperament } = require("../db");
 
 router.get("/", async (req, res) => {
-  let allInfo = await getAllInfo();
+  let { name } = req.query;
 
+  let allInfo = await getAllInfo();
   try {
+    if (name) {
+      let dogByName = allInfo.filter((e) =>
+        e.name.toLowerCase().includes(name.toLowerCase())
+      );
+
+      if (dogByName.length > 0) {
+        return res.send(dogByName);
+      }
+      res.status(404).json({ message: "We couldn't find your dog :c" });
+    }
     res.json(allInfo);
   } catch (error) {
-    res.status(404).send({ error: "Something went wrong getting data :c" });
+    res
+      .status(404)
+      .send({ message: "Something went wrong getting data :c", error });
+  }
+});
+
+router.get("/:idRaza", async (req, res) => {
+  let { idRaza } = req.params;
+  try {
+    let dogs = await getAllInfo();
+    let filtered = dogs.filter((e) => e.id == idRaza);
+    res.send(filtered);
+  } catch (error) {
+    res.status(404).json({message:"We couldn't get details :c", error})
+  }
+});
+
+router.post("/", async (req, res) => {
+  let { name, image, height, weight, lifeTime, temperament } = req.body;
+
+  try {
+    const [instance, created] = await Dog.findOrCreate({
+      where: {
+        name,
+      },
+      defaults: {
+        name,
+        image,
+        height,
+        weight,
+        lifeTime,
+        temperament,
+      },
+    });
+
+    let dogTemp = await Temperament.findAll({
+      where: {
+        name: temperament,
+      },
+    });
+    instance.addTemperaments(dogTemp);
+
+    if (created) return res.json({ message: "Dog created :D", instance });
+    else return res.status(404).send("Dog already exists");
+  } catch (error) {
+    res.status(404).json({
+      message: "Something went wrong trying to create the dog :c",
+      error,
+    });
   }
 });
 

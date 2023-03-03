@@ -18,11 +18,9 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        default:
-          "https://www.shutterstock.com/image-vector/paw-prints-logo-gray-vector-260nw-363492641.jpg",
         allowNull: false,
       },
-      heigth: {
+      height: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -34,6 +32,11 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      createdInDB: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull:false
+      }
     },
     {
       timestamps: false,
