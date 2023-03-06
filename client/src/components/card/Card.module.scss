@@ -1,0 +1,43 @@
+@import "../../assets/sassVariables/variables.scss";
+
+.container{
+    width: 250px;
+    height: 300px;
+    background: $orange;
+    border-radius: 5px;
+    
+}
+.imgContainer{
+    width: 250px;
+    height: 190px;
+    img{
+        border-radius: 5px 5px 0 0;
+        object-fit: cover;
+        width: inherit;
+        height: inherit;
+    }
+}
+.textContainer{
+    width: 100%;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 8px;
+}
+a{
+    text-decoration: none;
+}
+.name, .temperament, .weight{
+    color: $purple;
+    text-align: start;
+}
+.name{
+    font-size: 25px;
+}
+.temperament{
+    font-size: 20px;
+}
+.weight{
+    font-size: 20px;
+}

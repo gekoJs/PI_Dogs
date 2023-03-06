@@ -1,0 +1,41 @@
+@import "../../assets/sassVariables/variables.scss";
+.container{
+    background: $purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 80px;
+}
+h6{
+    font-size: 22px;
+    color: $orange;
+    position: absolute;
+    left: 12px;
+    font-family: "Gloock";
+}
+.searchBar, .searchButton{
+    color: $purple;
+    font-family: "Gloock";
+    background-color: $orange;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px 0 0 50px;
+    outline: none;
+}
+.searchBar{
+    width: 500px;
+    &::placeholder{
+        color: $purple;
+    }
+}
+.searchButton{
+    padding: 11px 23px;
+    border-radius: 0px 50px 50px 0px;
+    border: 1px solid $orange;
+    &:hover{
+        background: $purple;
+        color: $orange;
+        cursor: pointer;
+    }
+}
