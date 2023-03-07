@@ -29,6 +29,7 @@ export default function Home() {
     dispatch(loaderHandler(true));
     dispatch(getAllDogs());
   }, [dispatch]);
+  
   return (
     <div className={style.container}>
       {loader ? (
