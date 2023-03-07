@@ -9,3 +9,4 @@ export const FILTER_CREATED_DOG = "FILTER_CREATED_DOG";
 export const POST_DOG = "POST_DOG";
 export const CLEAR_DETAIL = "CLEAR_DETAIL";
 export const DELETE_DOG = "DELETE_DOG";
+export const LOADER = "LOADER";

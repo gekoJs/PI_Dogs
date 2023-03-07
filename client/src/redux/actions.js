@@ -1,5 +1,6 @@
 import {
   GET_ALL_DOGS,
+  LOADER,
   //   GET_ALL_TEMPERAMENTS,
   //   GET_DOG_DETAIL,
   //   GET_DOG_NAME,
@@ -23,8 +24,15 @@ export const getAllDogs = () => async (dispatch) => {
       });
     });
   } catch (error) {
-    return{
-        message: `error getting dogs, ${error.message}`
-    }
+    return {
+      message: `error getting dogs, ${error.message}`,
+    };
   }
+};
+
+export const loaderHandler = (dispatch) => {
+  return {
+    type: LOADER,
+    payload: dispatch,
+  };
 };

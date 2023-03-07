@@ -1,9 +1,20 @@
 import "./App.css";
 import LandingPage from "./pages/landingPage/LandingPage";
-import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home/Home";
 
+import { Routes, Route } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { loaderHandler } from "./redux/actions";
+
+import { useEffect } from "react";
+
 function App() {
+  let dispatch = useDispatch();
+  const loader = useSelector((state) => state.loader);
+  useEffect(() => {
+    dispatch()
+  });
   return (
     <div className="App">
       <Routes>
