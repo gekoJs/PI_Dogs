@@ -8,22 +8,22 @@ router.get("/", async (req, res) => {
   let { name } = req.query;
 
   let allInfo = await getAllInfo();
+
   try {
     if (name) {
       let dogByName = allInfo.filter((e) =>
         e.name.toLowerCase().includes(name.toLowerCase())
       );
-
       if (dogByName.length > 0) {
         return res.send(dogByName);
       }
-      res.status(404).json({ message: "We couldn't find your dog :c" });
+      throw Error("Sorry, we couldn't find your dog :c")
     }
     res.json(allInfo);
   } catch (error) {
     res
       .status(404)
-      .send({ message: "Something went wrong getting data :c", error });
+      .send({ message: error.message});
   }
 });
 
@@ -32,9 +32,12 @@ router.get("/:idRaza", async (req, res) => {
   try {
     let dogs = await getAllInfo();
     let filtered = dogs.filter((e) => e.id == idRaza);
+    if(!filtered.length) throw Error("Sorry, we couldnt find details of the dog :c")
     res.send(filtered);
   } catch (error) {
-    res.status(404).json({message:"We couldn't get details :c", error})
+    res
+      .status(404)
+      .send({ message: error.message});
   }
 });
 
@@ -64,12 +67,12 @@ router.post("/", async (req, res) => {
     instance.addTemperaments(dogTemp);
 
     if (created) return res.json({ message: "Dog created :D", instance });
-    else return res.status(404).send("Dog already exists");
+    else throw Error("Dog already exists")
+
   } catch (error) {
-    res.status(404).json({
-      message: "Something went wrong trying to create the dog :c",
-      error,
-    });
+    res
+      .status(404)
+      .send({ message: error.message});
   }
 });
 

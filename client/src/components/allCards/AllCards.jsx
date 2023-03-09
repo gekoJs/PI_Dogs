@@ -17,10 +17,13 @@ export default function AllCards({
             return (
               <div key={dog.id}>
                 <Card
+                  id = {dog.id}
                   name={dog.name}
                   image={dog.image.url}
                   temperament={dog.temperament}
+                  height={dog.height}
                   weight={dog.weight}
+                  lifeTime = {dog.lifeTime}
                 />
               </div>
             );

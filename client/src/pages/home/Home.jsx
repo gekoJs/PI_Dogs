@@ -2,17 +2,20 @@ import style from "./Home.module.scss";
 import NavBar from "../../components/navBar/NavBar";
 import AllCards from "../../components/allCards/AllCards";
 import Loader from "../../components/loader/loader";
+// import Error from "../../components/error/Error";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs, loaderHandler } from "../../redux/actions";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   // redux state-------------------------------
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.allDogs);
   const loader = useSelector((state) => state.loader);
+
   // redux state-------------------------------
 
   //   pagination------------------------------
@@ -29,21 +32,27 @@ export default function Home() {
     dispatch(loaderHandler(true));
     dispatch(getAllDogs());
   }, [dispatch]);
-  
+
+  const navigate = useNavigate()
+
   return (
     <div className={style.container}>
       {loader ? (
         <Loader />
       ) : (
         <div>
-          <NavBar />
-          <AllCards
-            postsPerPage={postsPerPage}
-            allDogs={allDogs}
-            currentPage = {currentPage}
-            setCurrentPage = {setCurrentPage}
-            paginate={paginate}
-          />
+          <NavBar paginate={paginate} />
+          {allDogs.length ? (
+            <AllCards
+              postsPerPage={postsPerPage}
+              allDogs={allDogs}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              paginate={paginate}
+            />
+          ) : (
+            navigate("/error")
+          )}
         </div>
       )}
     </div>

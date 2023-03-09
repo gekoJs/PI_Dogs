@@ -21,7 +21,7 @@ export default function LandingPage() {
 
           <div className={style.content}>
             <h1>Welcome to my dogs-pi</h1>
-            <Link to="/home">
+            <Link to="/dogs">
               <button>Go Home</button>
             </Link>
           </div>

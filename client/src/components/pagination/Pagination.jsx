@@ -59,6 +59,7 @@ export default function Pagination({
 
   return (
     <div>
+      {pages.length > 1 ? (
       <ul className={style.paginationContainer}>
 
         <li className={`${style.paginationLi} ${style.prev}`}>
@@ -94,6 +95,7 @@ export default function Pagination({
           </button>
         </li>
       </ul>
+      ) : null}
     </div>
   );
 }

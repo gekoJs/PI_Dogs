@@ -3,46 +3,69 @@ const axios = require("axios");
 const { Dog, Temperament } = require("../db");
 
 const getApiInfo = async () => {
-  const apiInfo = await axios.get("https://api.thedogapi.com/v1/breeds");
-  const info = await apiInfo.data.map((e) => {
+  try {
+    const apiInfo = await axios.get("https://api.thedogapi.com/v1/breeds");
+    return apiInfo.data.map((e) => {
+      return {
+        id: e.id,
+        name: e.name,
+        image: e.image,
+        temperament: e.temperament,
+        height: e.height.metric,
+        weight: e.weight.metric,
+        lifeTime: e.life_span,
+      };
+    });
+  } catch (error) {
+    console.log(error.message)
     return {
-      id: e.id,
-      name: e.name,
-      image: e.image,
-      temperament: e.temperament,
-      height: e.height.metric,
-      weight: e.weight.metric,
-      lifetime: e.life_span,
+      error: `Something went wrong getting the Dogs Api - ${error}`,
     };
-  });
-  return info;
+  }
 };
 
 const getDBInfo = async () => {
-  const DBinfo = await Dog.findAll({
-    include: {
-      model:Temperament
-    }
-  });
-  const finalInf = DBinfo.map(e=>{
+  try {
+    const DBinfo = await Dog.findAll({
+      include: {
+        model: Temperament,
+      },
+    });
+    const finalInf = DBinfo.map((e) => {
+      return {
+        id: e.id,
+        name: e.name,
+        image: e.image,
+        height: e.height,
+        weight: e.weight,
+        lifeTime: e.lifeTime,
+        createdinDB: e.createdinDB,
+        temperament: e.temperaments.map((i) => i.name).join(", "),
+      };
+    });
+    return finalInf;
+  } catch (error) {
     return {
-      id: e.id,
-      name: e.name,
-      image: e.image,
-      height: e.height,
-      weight: e.weight,
-      lifetime: e.lifeTime,
-      createdinDB: e.createdinDB,
-      temperament: e.temperaments.map(i=>i.name).join(", ")
-    }
-  })
-  return finalInf;
+      error: `Something went wrong getting the Dogs Api - ${error}`,
+    };
+  }
 };
 
 const getAllInfo = async () => {
+  
   let apiInfo = await getApiInfo();
-  let DBInfo = await getDBInfo()
-  return apiInfo.concat(DBInfo)
+  let DBInfo = await getDBInfo();
+
+  if (apiInfo.error) {
+    console.log(apiInfo.error);
+    return DBInfo;
+  }
+  if (DBInfo.error) {
+    console.log(DBInfo);
+    return apiInfo;
+  }
+
+  return apiInfo.concat(DBInfo);
 };
 
 module.exports = { getAllInfo };
