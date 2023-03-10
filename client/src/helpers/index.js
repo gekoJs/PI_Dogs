@@ -1,7 +1,5 @@
 export const weightInputHandler = (input) => {
   const weight = input
-    .split("-")
-    .map((e) => e.trim())
     .map((e) => `${e}Kg`)
     .join(" - ");
   return weight;

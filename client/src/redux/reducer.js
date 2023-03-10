@@ -4,20 +4,20 @@ import {
   LOADER,
   MANAGE_ERROR,
   GET_DOG_DETAIL,
-
-  //   GET_ALL_TEMPERAMENTS,
-  //   FILTER_BY_NAME,
-  //   FILTER_BY_TEMPERAMENTS,
+  GET_ALL_TEMPERAMENTS,
+  FILTER_BY_TEMPERAMENTS,
+  FILTER_BY_ORIGIN,
+  FILTER_BY_NAME,
+  FILTER_BY_WEIGHT,
   //   FILTER_BY_WEIGHT,
-  //   FILTER_CREATED_DOG,
   //   CLEAR_DETAIL,
   //   POST_DOG,
   //   DELETE_DOG,
 } from "./types";
 
 const initialState = {
+  filteredDogs: [],
   allDogs: [],
-  dogs: [],
   dogDetail: {},
   temperaments: [],
   loader: false,
@@ -46,6 +46,79 @@ export default function rootReducer(state = initialState, action) {
         loader: false,
         error: action.payload.message,
       };
+    case GET_ALL_TEMPERAMENTS:
+      return {
+        ...state,
+        temperaments: action.payload,
+        loader: false,
+        error: action.payload.message,
+      };
+    case FILTER_BY_TEMPERAMENTS:
+      const tempFiltered =
+        action.payload === "All"
+          ? state.allDogs
+          : state.allDogs.filter((e) =>
+              e.temperament?.includes(action.payload)
+            );
+      return {
+        ...state,
+        filteredDogs: tempFiltered,
+        loader: false,
+        error: action.payload.message,
+      };
+    case FILTER_BY_ORIGIN:
+      const origFiltered =
+        action.payload === "All"
+          ? state.allDogs
+          : action.payload === "Api"
+          ? state.allDogs.filter((e) => e.createdInDB === true)
+          : state.allDogs.filter((e) => e.createdInDB === false);
+      return {
+        ...state,
+        filteredDogs: origFiltered,
+        loader: false,
+        error: action.payload.message,
+      };
+    case FILTER_BY_NAME:
+      let filteredDog =
+        action.payload === "asc"
+          ? state.allDogs.sort((a, b) => {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+              if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+              return 0;
+            })
+          : state.allDogs.sort((a, b) => {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+              if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+              return 0;
+            });
+
+      return {
+        ...state,
+        filteredDogs: filteredDog,
+        loader: false,
+        error: action.payload.message,
+      };
+    case FILTER_BY_WEIGHT:
+      let filterWeight =
+        action.payload === "min"
+          ? state.allDogs.sort((a, b) => 
+            ((a.weight[0]+a.weight[1])/2)-((b.weight[0]+b.weight[1])/2)
+            )
+          : state.allDogs.sort((a, b) => 
+          ((a.weight[0]+a.weight[1])/2)-((b.weight[0]+b.weight[1])/2)
+          ).reverse();
+      // let filterWeight = action.payload === "min" ? (state.allDogs.sort((a,b)=>{
+      //   return a.weight - b.weight
+      // })) : state.allDogs.sort((a,b)=>{
+      //   return a.weight - b.weight
+      // }).reverse()
+      // console.log(filterWeight.map(e=>e.weight))
+      console.log(state.allDogs.map(e=>e.weight))
+      return {
+        ...state,
+        filteredDogs : filterWeight
+      };
     case LOADER:
       return {
         ...state,
@@ -55,7 +128,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         allDogs: [],
-        loader:false,
+        loader: false,
         error: action.payload,
       };
     default:

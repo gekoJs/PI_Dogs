@@ -4,7 +4,7 @@ import NavBar from "../../components/navBar/NavBar";
 
 import { weightInputHandler, heightInputHandler } from "../../helpers";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -30,14 +30,16 @@ export default function DetailsPage() {
         <Loader />
       ) : (
         <div>
-            <NavBar />
+          <NavBar />
           <div className={style.containerAll}>
             {Object.keys(dog).length ? (
               <div className={style.containerBoxes}>
                 <div className={style.containerText}>
                   <h1 className={style.title}>{dog[0].name}</h1>
+                  <p>
+                    <div></div> <b>ID:</b> {dog[0].id}
+                  </p>
                   <p className={style.lifeTime}>
-                    {" "}
                     <div></div> <b>Life time:</b> {dog[0].lifeTime}
                   </p>
                   <p className={style.weight}>

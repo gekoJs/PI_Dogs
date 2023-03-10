@@ -8,7 +8,12 @@ router.get("/", async (req, res) => {
   try {
     let apiInfo = await axios
       .get("https://api.thedogapi.com/v1/breeds")
-      .then((r) => r.data);
+      .then((r) => r.data)
+      .catch((err) => {
+        throw Error(
+          "Something went wrong tryng to get temperaments from the api :c"
+        );
+      });
 
     let temp = apiInfo
       .map((e) => e.temperament)
@@ -25,14 +30,11 @@ router.get("/", async (req, res) => {
         });
       }
     });
-
     let temperaments = await Temperament.findAll();
 
-    res.json(temperaments);
+    res.send(temperaments);
   } catch (error) {
-    res
-      .status(404)
-      .json({ message: "something went wrong getting temperament", error });
+    res.status(404).send({ message: error.message });
   }
 });
 

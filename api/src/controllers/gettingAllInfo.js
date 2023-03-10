@@ -12,7 +12,8 @@ const getApiInfo = async () => {
         image: e.image,
         temperament: e.temperament,
         height: e.height.metric,
-        weight: e.weight.metric,
+        weight: e.weight.metric.split("-").map(e=>parseInt(e)),
+        createdInDB: false,
         lifeTime: e.life_span,
       };
     });
@@ -39,7 +40,7 @@ const getDBInfo = async () => {
         height: e.height,
         weight: e.weight,
         lifeTime: e.lifeTime,
-        createdinDB: e.createdinDB,
+        createdInDB: e.createdInDB,
         temperament: e.temperaments.map((i) => i.name).join(", "),
       };
     });

@@ -2,21 +2,23 @@ import style from "./Home.module.scss";
 import NavBar from "../../components/navBar/NavBar";
 import AllCards from "../../components/allCards/AllCards";
 import Loader from "../../components/loader/loader";
-// import Error from "../../components/error/Error";
+import FilterDogs from "../../components/filterDogs/FilterDogs";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs, loaderHandler } from "../../redux/actions";
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   // redux state-------------------------------
   const dispatch = useDispatch();
-  const allDogs = useSelector((state) => state.allDogs);
+  let allDogs = useSelector((state) => state.allDogs);
   const loader = useSelector((state) => state.loader);
-
+  let filteredDogs = useSelector((state) => state.filteredDogs);
   // redux state-------------------------------
+  
+  if (filteredDogs.length>0) allDogs = filteredDogs;
 
   //   pagination------------------------------
   const [currentPage, setCurrentPage] = useState(1);
@@ -33,7 +35,7 @@ export default function Home() {
     dispatch(getAllDogs());
   }, [dispatch]);
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   return (
     <div className={style.container}>
@@ -42,6 +44,7 @@ export default function Home() {
       ) : (
         <div>
           <NavBar paginate={paginate} />
+          <FilterDogs paginate={paginate} />
           {allDogs.length ? (
             <AllCards
               postsPerPage={postsPerPage}
@@ -50,9 +53,8 @@ export default function Home() {
               setCurrentPage={setCurrentPage}
               paginate={paginate}
             />
-          ) : (
-            navigate("/error")
-          )}
+          ) : // navigate("/error")
+          null}
         </div>
       )}
     </div>

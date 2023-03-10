@@ -4,11 +4,11 @@ import {
   GET_DOG_BY_NAME,
   GET_DOG_DETAIL,
   MANAGE_ERROR,
-  //   GET_ALL_TEMPERAMENTS,
-  //   FILTER_BY_NAME,
-  //   FILTER_BY_TEMPERAMENTS,
-  //   FILTER_BY_WEIGHT,
-  //   FILTER_CREATED_DOG,
+  GET_ALL_TEMPERAMENTS,
+  FILTER_BY_TEMPERAMENTS,
+  FILTER_BY_ORIGIN,
+  FILTER_BY_NAME,
+  FILTER_BY_WEIGHT,
   //   CLEAR_DETAIL,
   //   POST_DOG,
   //   DELETE_DOG,
@@ -26,26 +26,25 @@ export const getAllDogs = () => async (dispatch) => {
     });
   } catch (error) {
     dispatch({
-      type:MANAGE_ERROR,
-      payload: error.response.data.message
-    })
+      type: MANAGE_ERROR,
+      payload: error.response.data.message,
+    });
   }
 };
 
 export const getDogByName = (name) => async (dispatch) => {
-  try{
-    await axios.get(`http://localhost:3001/dogs?name=${name}`).then(resp =>{
+  try {
+    await axios.get(`http://localhost:3001/dogs?name=${name}`).then((resp) => {
       dispatch({
-        type:GET_DOG_BY_NAME,
-        payload: resp.data
-      })
-    })
-  }
-  catch(error){
+        type: GET_DOG_BY_NAME,
+        payload: resp.data,
+      });
+    });
+  } catch (error) {
     dispatch({
-      type:MANAGE_ERROR,
-      payload: error.response.data.message
-    })
+      type: MANAGE_ERROR,
+      payload: error.response.data.message,
+    });
   }
 };
 
@@ -59,14 +58,59 @@ export const getDogDetails = (id) => async (dispatch) => {
     });
   } catch (error) {
     dispatch({
-      type:MANAGE_ERROR,
-      payload: error.response.data.message
-    })}
+      type: MANAGE_ERROR,
+      payload: error.response.data.message,
+    });
+  }
 };
 
-export const loaderHandler = (dispatch) => {
+export const getAllTemperaments = () => async (dispatch) => {
+  try {
+    await axios.get("http://localhost:3001/temperaments").then((resp) => {
+      dispatch({
+        type: GET_ALL_TEMPERAMENTS,
+        payload: resp.data,
+      });
+    });
+  } catch (error) {
+    dispatch({
+      type: MANAGE_ERROR,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+export const filterByTemperament = (payload) => {
+  return {
+    type: FILTER_BY_TEMPERAMENTS,
+    payload,
+  };
+};
+
+export const filterByOrigin = (payload) => {
+  return {
+    type: FILTER_BY_ORIGIN,
+    payload,
+  };
+};
+
+export const filterByName = (payload) => {
+  return {
+    type: FILTER_BY_NAME,
+    payload,
+  };
+};
+
+export function filterByWeight(payload) {
+  return {
+    type: FILTER_BY_WEIGHT,
+    payload,
+  };
+}
+
+export const loaderHandler = (payload) => {
   return {
     type: LOADER,
-    payload: dispatch,
+    payload,
   };
 };
