@@ -7,6 +7,7 @@ import FilterDogs from "../../components/filterDogs/FilterDogs";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDogs, loaderHandler } from "../../redux/actions";
 
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
@@ -45,6 +46,9 @@ export default function Home() {
         <div>
           <NavBar paginate={paginate} />
           <FilterDogs paginate={paginate} />
+          <Link to="/create">
+            <button>create</button>
+          </Link>
           {allDogs.length ? (
             <AllCards
               postsPerPage={postsPerPage}

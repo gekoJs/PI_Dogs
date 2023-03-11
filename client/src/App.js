@@ -7,6 +7,7 @@ import Error from "./components/error/Error";
 
 import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PostDog from "./pages/postDog/PostDog";
 
 function App() {
   const manageError = useSelector((state) => state.error);
@@ -18,6 +19,7 @@ function App() {
         <Route path="/dogs" element={<Home />} />
         <Route path="/dogs/:idRaza" element={<DetailsPage />} />
         <Route path="/error" element={<Error manageError={manageError} />} />
+        <Route path="/create" element={<PostDog/>} />
         <Route path="*" element={<div>Default</div>} />
       </Routes>
     </div>

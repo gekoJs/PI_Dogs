@@ -9,7 +9,6 @@ import {
   FILTER_BY_ORIGIN,
   FILTER_BY_NAME,
   FILTER_BY_WEIGHT,
-  //   FILTER_BY_WEIGHT,
   //   CLEAR_DETAIL,
   //   POST_DOG,
   //   DELETE_DOG,
@@ -102,22 +101,21 @@ export default function rootReducer(state = initialState, action) {
     case FILTER_BY_WEIGHT:
       let filterWeight =
         action.payload === "min"
-          ? state.allDogs.sort((a, b) => 
-            ((a.weight[0]+a.weight[1])/2)-((b.weight[0]+b.weight[1])/2)
+          ? state.allDogs.sort(
+              (a, b) =>
+                (a.weight[0] + a.weight[1]) / 2 -
+                (b.weight[0] + b.weight[1]) / 2
             )
-          : state.allDogs.sort((a, b) => 
-          ((a.weight[0]+a.weight[1])/2)-((b.weight[0]+b.weight[1])/2)
-          ).reverse();
-      // let filterWeight = action.payload === "min" ? (state.allDogs.sort((a,b)=>{
-      //   return a.weight - b.weight
-      // })) : state.allDogs.sort((a,b)=>{
-      //   return a.weight - b.weight
-      // }).reverse()
-      // console.log(filterWeight.map(e=>e.weight))
-      console.log(state.allDogs.map(e=>e.weight))
+          : state.allDogs
+              .sort(
+                (a, b) =>
+                  (a.weight[0] + a.weight[1]) / 2 -
+                  (b.weight[0] + b.weight[1]) / 2
+              )
+              .reverse();
       return {
         ...state,
-        filteredDogs : filterWeight
+        filteredDogs: filterWeight,
       };
     case LOADER:
       return {

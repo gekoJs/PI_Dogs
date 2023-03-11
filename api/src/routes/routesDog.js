@@ -55,7 +55,6 @@ router.post("/", async (req, res) => {
         height,
         weight,
         lifeTime,
-        temperament,
       },
     });
 

@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        defaultValue: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWuOQFxVn4v4eNS5ddiIrCEBK9E36wUQFEkw&usqp=CAU",
+        defaultValue: "https://cdn-icons-png.flaticon.com/512/2172/2172097.png",
         allowNull: false,
       },
       height: {
@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       weight: {
-        type: DataTypes.STRING,
+        type: DataTypes.ARRAY(DataTypes.DECIMAL),
         allowNull: false,
       },
       lifeTime: {

@@ -108,6 +108,18 @@ export function filterByWeight(payload) {
   };
 }
 
+export const postDog = (payload) => async (dispatch) => {
+  try {
+    let post = await axios.post("http://localhost:3001/dogs", payload);
+    return post
+  } catch (error) {
+    dispatch({
+      type: MANAGE_ERROR,
+      payload: error.response.data.message,
+    });
+  }
+};
+
 export const loaderHandler = (payload) => {
   return {
     type: LOADER,
