@@ -16,6 +16,7 @@ import {
 
 const initialState = {
   filteredDogs: [],
+  filteredDogsWeight: [],
   allDogs: [],
   dogDetail: {},
   temperaments: [],
@@ -79,14 +80,14 @@ export default function rootReducer(state = initialState, action) {
         error: action.payload.message,
       };
     case FILTER_BY_NAME:
-      let filteredDog =
+      let filteredDog = state.allDogs;
         action.payload === "asc"
-          ? state.allDogs.sort((a, b) => {
+          ? filteredDog.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
               if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
               return 0;
             })
-          : state.allDogs.sort((a, b) => {
+          : filteredDog.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
               if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
               return 0;
@@ -115,7 +116,7 @@ export default function rootReducer(state = initialState, action) {
               .reverse();
       return {
         ...state,
-        filteredDogs: filterWeight,
+        filteredDogsWeight: filterWeight,
       };
     case LOADER:
       return {

@@ -30,8 +30,8 @@ export default function FilterDogs({ paginate }) {
   };
   const handleFilteredByName = (e) => {
     e.preventDefault(e);
-    dispatch(filterByName(e.target.value));
     paginate(1);
+    dispatch(filterByName(e.target.value));
   };
 
   const handleFilteredByWeight = (e) => {
@@ -45,10 +45,9 @@ export default function FilterDogs({ paginate }) {
         className={style.select}
         onChange={(e) => handleFilterByTemperament(e)}
       >
-        <option disabled defaultValue>
-          filter by temperament
+        <option value="All">
+          {temperaments.length ? "Sort by temperament" : "Loading..."}
         </option>
-        <option value="All">All</option>
         {temperaments &&
           temperaments.map((e) => {
             return (
@@ -63,10 +62,9 @@ export default function FilterDogs({ paginate }) {
         className={style.select}
         onChange={(e) => handleFilterByOrigen(e)}
       >
-        <option disabled defaultValue>
+        <option value="All" defaultValue>
           Order by origin
         </option>
-        <option value="All">All</option>
         <option value="Created">Created</option>
         <option value="Api">Api</option>
       </select>
@@ -75,7 +73,7 @@ export default function FilterDogs({ paginate }) {
         className={style.select}
         onChange={(e) => handleFilteredByName(e)}
       >
-        <option disabled defaultValue>
+        <option defaultValue>
           Order by name
         </option>
         <option value="asc">A-Z</option>
@@ -84,9 +82,9 @@ export default function FilterDogs({ paginate }) {
 
       <select
         className={style.select}
-        onChange={(e) => handleFilteredByWeight(e)}
+        onChange={handleFilteredByWeight}
       >
-        <option disabled defaultValue>
+        <option defaultValue>
           Order by wieght
         </option>
         <option value="max">Max</option>

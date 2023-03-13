@@ -17,8 +17,10 @@ export default function Home() {
   let allDogs = useSelector((state) => state.allDogs);
   const loader = useSelector((state) => state.loader);
   let filteredDogs = useSelector((state) => state.filteredDogs);
+  // let filteredDogsWeight = useSelector((state) => state.filteredDogsWeight);
   // redux state-------------------------------
-  
+
+  // if (filteredDogsWeight.length>0) allDogs = filteredDogs;
   if (filteredDogs.length>0) allDogs = filteredDogs;
 
   //   pagination------------------------------
@@ -37,26 +39,28 @@ export default function Home() {
   }, [dispatch]);
 
   // const navigate = useNavigate()
-
+  // console.log(filteredDogsWeight)
   return (
     <div className={style.container}>
       {loader ? (
         <Loader />
       ) : (
         <div>
-          <NavBar paginate={paginate} />
-          <FilterDogs paginate={paginate} />
-          <Link to="/create">
-            <button>create</button>
-          </Link>
           {allDogs.length ? (
-            <AllCards
-              postsPerPage={postsPerPage}
-              allDogs={allDogs}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              paginate={paginate}
-            />
+            <div>
+              <NavBar paginate={paginate} />
+              <FilterDogs paginate={paginate} />
+              <Link to="/create">
+                <button>create</button>
+              </Link>
+              <AllCards
+                postsPerPage={postsPerPage}
+                allDogs={allDogs}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                paginate={paginate}
+              />
+            </div>
           ) : // navigate("/error")
           null}
         </div>

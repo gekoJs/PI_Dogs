@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllTemperaments, postDog } from "../../redux/actions";
 import style from "./PostDog.module.scss";
 import { validate } from "../../helpers";
+
 export default function PostDog() {
   const dispatch = useDispatch();
   const temperaments = useSelector((state) => state.temperaments);
+  const manageCreateError = useSelector((state) => state.errors);
 
   const [values, setValues] = useState({
     name: "",
@@ -66,13 +68,15 @@ export default function PostDog() {
     if (!Object.keys(errors).length) {
       let valuesToSubmit = {
         name: values.name,
-        image: values.image.length ? values.image : "https://cdn-icons-png.flaticon.com/512/2172/2172097.png",
+        image: values.image.length
+          ? values.image
+          : "https://cdn-icons-png.flaticon.com/512/2172/2172097.png",
         height: `${values.min_height} - ${values.max_height}`,
         weight: [parseInt(values.min_weight), parseInt(values.max_weight)],
         lifeTime: `${values.min_lifeTime} - ${values.max_lifeTime}`,
         temperament: values.temperaments,
       };
-      dispatch(postDog(valuesToSubmit))
+      dispatch(postDog(valuesToSubmit));
       setValues({
         name: "",
         min_height: "",
@@ -83,128 +87,251 @@ export default function PostDog() {
         max_lifeTime: "",
         temperaments: [],
         image: "",
-      })
+      });
     }
     // history.push("/home");
   };
-
+  console.log(manageCreateError);
   return (
     <div className={style.container}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name</label>
-          <input
-            type="text"
-            value={values.name}
-            name="name"
-            onChange={changeHandler}
-            placeholder="name"
-          />
-          {errors.name && <p>{errors.name}</p>}
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Name :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="text"
+              value={values.name}
+              name="name"
+              onChange={changeHandler}
+              placeholder="doggie"
+            />
+            {errors.name && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.name}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>minimum height</label>
-          <input
-            type="number"
-            value={values.min_height}
-            name="min_height"
-            onChange={(e) => changeHandler(e)}
-            placeholder="minimum height"
-          />
-          {errors.min_height && <p>{errors.min_height}</p>}
+        <hr />
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Minimum height (Cm) :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="number"
+              value={values.min_height}
+              name="min_height"
+              onChange={(e) => changeHandler(e)}
+              placeholder="50"
+            />
+            {errors.min_height && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.min_height}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>maximum height</label>
-          <input
-            type="number"
-            name="max_height"
-            value={values.max_height}
-            onChange={(e) => changeHandler(e)}
-            placeholder="maximum height"
-          />
-          {errors.max_height && <p>{errors.max_height}</p>}
+        <hr />
+
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Maximum height (Cm) :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="number"
+              name="max_height"
+              value={values.max_height}
+              onChange={(e) => changeHandler(e)}
+              placeholder="100"
+            />
+            {errors.max_height && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.max_height}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>minimum weight</label>
-          <input
-            type="number"
-            name="min_weight"
-            value={values.min_weight}
-            onChange={(e) => changeHandler(e)}
-            placeholder="minimum weight"
-          />
-          {errors.min_weight && <p>{errors.min_weight}</p>}
+        <hr />
+
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Minimum weight (Kg) :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="number"
+              name="min_weight"
+              value={values.min_weight}
+              onChange={(e) => changeHandler(e)}
+              placeholder="20"
+            />
+            {errors.min_weight && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.min_weight}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>maximum weight</label>
-          <input
-            type="number"
-            name="max_weight"
-            value={values.max_weight}
-            onChange={(e) => changeHandler(e)}
-            placeholder="maximum weight"
-          />
-          {errors.max_weight && <p>{errors.max_weight}</p>}
+        <hr />
+
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Maximum weight (Kg) :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="number"
+              name="max_weight"
+              value={values.max_weight}
+              onChange={(e) => changeHandler(e)}
+              placeholder="50"
+            />
+            {errors.max_weight && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.max_weight}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>Minimum life Time</label>
-          <input
-            type="number"
-            name="min_lifeTime"
-            value={values.min_lifeTime}
-            onChange={(e) => changeHandler(e)}
-            placeholder="Minimum lifeTime"
-          />
-          {errors.min_lifeTime && <p>{errors.min_lifeTime}</p>}
+        <hr />
+
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Minimum life Time (Y) :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="number"
+              name="min_lifeTime"
+              value={values.min_lifeTime}
+              onChange={(e) => changeHandler(e)}
+              placeholder="10"
+            />
+            {errors.min_lifeTime && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.min_lifeTime}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>Maximum life Time</label>
-          <input
-            type="number"
-            name="max_lifeTime"
-            value={values.max_lifeTime}
-            onChange={(e) => changeHandler(e)}
-            placeholder="Maximum lifeTime"
-          />
-          {errors.max_lifeTime && <p>{errors.max_lifeTime}</p>}
+        <hr />
+
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>Maximum life Time (Y) :</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="number"
+              name="max_lifeTime"
+              value={values.max_lifeTime}
+              onChange={(e) => changeHandler(e)}
+              placeholder="20"
+            />
+            {errors.max_lifeTime && (
+              <p className={style.validation}>
+                {" "}
+                <b>{errors.max_lifeTime}</b>{" "}
+              </p>
+            )}
+          </div>
         </div>
-        <div>
-          <label>image</label>
-          <input
-            type="text"
-            name="image"
-            value={values.image}
-            onChange={(e) => changeHandler(e)}
-            placeholder="image"
-          />
+        <hr />
+
+        <div className={style.inputContainer}>
+          <label className={style.label}>
+            <b>image (URL):</b>
+          </label>
+          <div className={style.inputWrapper}>
+            <input
+              className={style.input}
+              type="text"
+              name="image"
+              value={values.image}
+              onChange={(e) => changeHandler(e)}
+              placeholder="image.png"
+            />
+          </div>
         </div>
+        <hr />
 
         <select
+          className={style.select}
           onChange={(e) => {
             handleSelect(e);
           }}
         >
-          <option value>Temperaments</option>
+          <option className={style.option} value>
+            {temperaments.length ? "Temperaments" : "Loading..."}
+          </option>
           {temperaments &&
             temperaments.map((e) => {
               return (
-                <option value={e.name} key={e.id}>
+                <option className={style.option} value={e.name} key={e.id}>
                   {e.name}
                 </option>
               );
             })}
         </select>
-        <div>
+        <div className={style.temperamentsContainer}>
           {values.temperaments.map((el, i) => {
             return (
-              <div key={i}>
-                {el} <button onClick={(ev) => handleErase(ev, el)}>X</button>{" "}
+              <div className={style.temperaments} key={i}>
+                {el}{" "}
+                <button
+                  className={style.eliminate}
+                  onClick={(ev) => handleErase(ev, el)}
+                >
+                  <svg
+                    fill="#000000"
+                    height="10px"
+                    width="10px"
+                    version="1.1"
+                    id="Capa_1"
+                    viewBox="0 0 460.775 460.775"
+                  >
+                    <path
+                      d="M285.08,230.397L456.218,59.27c6.076-6.077,6.076-15.911,0-21.986L423.511,4.565c-2.913-2.911-6.866-4.55-10.992-4.55
+	c-4.127,0-8.08,1.639-10.993,4.55l-171.138,171.14L59.25,4.565c-2.913-2.911-6.866-4.55-10.993-4.55
+	c-4.126,0-8.08,1.639-10.992,4.55L4.558,37.284c-6.077,6.075-6.077,15.909,0,21.986l171.138,171.128L4.575,401.505
+	c-6.074,6.077-6.074,15.911,0,21.986l32.709,32.719c2.911,2.911,6.865,4.55,10.992,4.55c4.127,0,8.08-1.639,10.994-4.55
+	l171.117-171.12l171.118,171.12c2.913,2.911,6.866,4.55,10.993,4.55c4.128,0,8.081-1.639,10.992-4.55l32.709-32.719
+	c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
+                    />
+                  </svg>
+                </button>{" "}
               </div>
             );
           })}
         </div>
-        {errors.temperaments && <p>{errors.temperaments}</p>}
-        <button disabled={Object.keys(errors).length} type="submit">
+        {errors.temperaments && (
+          <p className={style.validation}>
+            {" "}
+            <b>{errors.temperaments}</b>{" "}
+          </p>
+        )}
+        <button
+          className={style.submitBtn}
+          disabled={Object.keys(errors).length}
+          type="submit"
+        >
           Create
         </button>
       </form>
