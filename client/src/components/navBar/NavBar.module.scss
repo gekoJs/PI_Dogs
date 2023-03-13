@@ -7,6 +7,8 @@
     justify-content: center;
     position: relative;
     height: 80px;
+    position: fixed;
+    z-index: 10;
 }
 .link{
     h6{
@@ -16,6 +18,15 @@
     position: absolute;
     left: 12px;
     font-family: "Gloock";
+    padding: 10px;
+    border-radius: 10px;
+    &:hover{
+        color: $purple;
+        background-color: $orange;
+    }
+}
+.form{
+    background-color: $purple;
 }
 .searchBar, .searchButton{
     color: $purple;
@@ -33,9 +44,9 @@
     }
 }
 .searchButton{
-    padding: 11px 23px;
+    padding: 7px 23px;
     border-radius: 0px 50px 50px 0px;
-    border: 1px solid $orange;
+    border: 5px solid $orange;
     &:hover{
         background: $purple;
         color: $orange;

@@ -1,38 +1,27 @@
 @import "../../assets/sassVariables/variables.scss";
 
-.container_loading {
-  width: 100vw;
+.center{
+  width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+}
+.paw {
+  width: 78px;
+  animation: spinPaw 1s ease-in-out infinite;
 }
 
-.spinner {
-  border: 10px solid rgba(0, 0, 0, 0.1);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border-left-color: $purple;
-  animation: spin 1s ease infinite;
-}
-
-.cargando {
-  color: $purple;
-  font-size: 20px;
-  margin-top: 20px;
-}
-
-@keyframes spin {
+@keyframes spinPaw {
   0% {
-    transform: rotate(0deg);
+    transform: scale(1);
   }
-
+  
+  50% {
+    transform: scale(1.2);
+    opacity: .5;
+  }
   100% {
-    transform: rotate(360deg);
+    transform: scale(1);
   }
 }

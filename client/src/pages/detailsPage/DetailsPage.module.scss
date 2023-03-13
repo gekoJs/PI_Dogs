@@ -1,6 +1,6 @@
 @import "../../assets/sassVariables/variables.scss";
 .containerAll{
-    height: calc(100vh - 80px);
+    min-height: 100vh ;
     background: linear-gradient(rgba(5,7,12,0.75),rgba(5,7,12,0.75)), url("../../assets/images/pawsBackground.jpeg") no-repeat center center fixed;
     background-size: cover;
     color: $orange;
@@ -9,9 +9,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 }
 .containerBoxes{
+    margin-top: 80px;
     max-height: 580px;
+    min-height: 480px;
     background-color: $purpleRGBA;
     width: fit-content;
     padding: 20px;
@@ -28,7 +31,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     text-align: left;
-    p{
+    span{
         div{
             display: inline-block;
             min-width: 15px;

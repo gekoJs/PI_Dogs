@@ -1,23 +1,30 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import style from "./NavBar.module.scss";
-import { getDogByName } from "../../redux/actions";
-import { Link } from "react-router-dom";
+import { getAllDogs, getDogByName, loaderHandler } from "../../redux/actions";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function NavBar({ paginate }) {
+export default function NavBar({ currentPage, paginate }) {
   const [searchInput, setSearchInput] = useState("");
   const [placeHolder, setPlaceHolder] = useState("Rottweiler");
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  
   const handleInput = (e) => {
     setSearchInput(e.target.value);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    searchInput && dispatch(getDogByName(searchInput));
-    paginate(1);
-    setSearchInput("");
+    if (searchInput) {
+      dispatch(loaderHandler(true));
+      dispatch(getDogByName(searchInput));
+      setSearchInput("");
+      navigate("/dogs");
+      if (currentPage > 1) {
+        paginate(1);
+      }
+    }
   };
 
   useEffect(() => {
@@ -35,10 +42,14 @@ export default function NavBar({ paginate }) {
 
   return (
     <div className={style.container}>
-      <Link to="/dogs" className={style.link}>
+      <Link
+        to="/dogs"
+        onClick={() => dispatch(getAllDogs())}
+        className={style.link}
+      >
         <h6>Dogs-PI</h6>
       </Link>
-      <form>
+      <form className={style.form}>
         <input
           type="text"
           value={searchInput}

@@ -10,7 +10,7 @@ import {
   FILTER_BY_NAME,
   FILTER_BY_WEIGHT,
   //   CLEAR_DETAIL,
-  //   POST_DOG,
+    POST_DOG,
   //   DELETE_DOG,
 } from "./types";
 
@@ -108,10 +108,14 @@ export function filterByWeight(payload) {
   };
 }
 
-export const postDog = (payload) => async (dispatch) => {
+export const postDog = (data) => async (dispatch) => {
   try {
-    let post = await axios.post("http://localhost:3001/dogs", payload);
-    return post
+    const res = await axios.post("http://localhost:3001/dogs", data).then(resp=>{
+      dispatch({
+        type:POST_DOG,
+        payload: resp.data
+      })
+    });
   } catch (error) {
     dispatch({
       type: MANAGE_ERROR,
@@ -126,3 +130,10 @@ export const loaderHandler = (payload) => {
     payload,
   };
 };
+
+export const manageErr = (payload) => {
+  return{
+    type: MANAGE_ERROR,
+    payload
+  }
+}

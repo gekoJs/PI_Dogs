@@ -2,7 +2,7 @@ import style from "./Error.module.scss";
 import NavBar from "../navBar/NavBar";
 export default function Error({ manageError }) {
   return (
-    <div className={style.container}>
+    <div>
       <NavBar />
       <div className={style.textContainer}>
         <h3 className={style.err}>{manageError}</h3>

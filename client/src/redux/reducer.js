@@ -10,15 +10,15 @@ import {
   FILTER_BY_NAME,
   FILTER_BY_WEIGHT,
   //   CLEAR_DETAIL,
-  //   POST_DOG,
+    POST_DOG,
   //   DELETE_DOG,
 } from "./types";
 
 const initialState = {
   filteredDogs: [],
-  filteredDogsWeight: [],
   allDogs: [],
   dogDetail: {},
+  postedDog: {},
   temperaments: [],
   loader: false,
   error: [],
@@ -35,6 +35,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_DOG_BY_NAME:
       return {
         ...state,
+        filteredDogs: [],
         allDogs: action.payload,
         loader: false,
         error: action.payload.message,
@@ -80,14 +81,15 @@ export default function rootReducer(state = initialState, action) {
         error: action.payload.message,
       };
     case FILTER_BY_NAME:
-      let filteredDog = state.allDogs;
+      let stateDog = state.allDogs;
+      let sorted =
         action.payload === "asc"
-          ? filteredDog.sort((a, b) => {
+          ? stateDog.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
               if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
               return 0;
             })
-          : filteredDog.sort((a, b) => {
+          : stateDog.sort((a, b) => {
               if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
               if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
               return 0;
@@ -95,19 +97,20 @@ export default function rootReducer(state = initialState, action) {
 
       return {
         ...state,
-        filteredDogs: filteredDog,
+        filteredDogs: [...sorted],
         loader: false,
         error: action.payload.message,
       };
     case FILTER_BY_WEIGHT:
-      let filterWeight =
+      let stateDog_2 = state.allDogs;
+      let sorted_2 =
         action.payload === "min"
-          ? state.allDogs.sort(
+          ? stateDog_2.sort(
               (a, b) =>
                 (a.weight[0] + a.weight[1]) / 2 -
                 (b.weight[0] + b.weight[1]) / 2
             )
-          : state.allDogs
+          : stateDog_2
               .sort(
                 (a, b) =>
                   (a.weight[0] + a.weight[1]) / 2 -
@@ -116,8 +119,15 @@ export default function rootReducer(state = initialState, action) {
               .reverse();
       return {
         ...state,
-        filteredDogsWeight: filterWeight,
+        filteredDogs: [...sorted_2],
+        loader: false,
+        error: action.payload.message,
       };
+    case POST_DOG:
+      return {
+        ...state,
+        postedDog: action.payload
+      }
     case LOADER:
       return {
         ...state,

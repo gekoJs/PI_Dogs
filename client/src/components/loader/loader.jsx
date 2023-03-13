@@ -1,13 +1,9 @@
 import style from "./loader.module.scss";
-
+import paw from "../../assets/svg/Paw.svg";
 export default function Loader() {
   return (
     <div className={style.center}>
-      <div className={style.container_loading}>
-        <div className={style.spinner}>
-          <p className={style.cargando}>Loading...</p>
-        </div>
-      </div>
+        <img className={style.paw} src={paw} alt="" />
     </div>
   );
 }

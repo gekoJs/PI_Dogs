@@ -1,11 +1,9 @@
 @import "../../assets/sassVariables/variables.scss";
 .container{
-    // width: 1200px;
-    margin: auto;
+    margin-top: 80px;
 }
 .gridContainer{
-    margin: auto;
-    max-width: 1200px;
+    width: calc(100vw - 300px);
     padding: 28px;
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));

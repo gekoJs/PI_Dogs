@@ -71,7 +71,7 @@ router.post("/", async (req, res) => {
   } catch (error) {
     res
       .status(404)
-      .send({ message: error.message});
+      .json({ message: error.message});
   }
 });
 

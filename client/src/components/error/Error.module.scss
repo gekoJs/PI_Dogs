@@ -1,18 +1,15 @@
 @import "../../assets/sassVariables/variables.scss";
-.container {
-  background: linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)),
-    url("../../assets/images/pawsBackground.jpeg") no-repeat center center fixed;
-  background-size: cover;
-}
+
 .textContainer {
   width: 100%;
-  height: calc(100vh - 80px);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 .err {
+  margin-top: 80px;
   color: $orange;
   font-family: "Gloock";
   letter-spacing: 1px;
