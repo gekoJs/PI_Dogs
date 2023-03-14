@@ -12,7 +12,7 @@ export default function Pagination({
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
 
   const pages = [];
-  for (let i = 1; i < Math.ceil(allDogs.length / 8); i++) {
+  for (let i = 1; i <= Math.ceil(allDogs.length / 8); i++) {
     pages.push(i);
   }
 
