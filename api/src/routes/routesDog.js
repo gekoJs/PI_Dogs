@@ -17,13 +17,11 @@ router.get("/", async (req, res) => {
       if (dogByName.length > 0) {
         return res.send(dogByName);
       }
-      throw Error("Sorry, we couldn't find your dog :c")
+      throw Error("Sorry, we couldn't find your dog :c");
     }
     res.json(allInfo);
   } catch (error) {
-    res
-      .status(404)
-      .send({ message: error.message});
+    res.status(404).send({ message: error.message });
   }
 });
 
@@ -32,12 +30,11 @@ router.get("/:idRaza", async (req, res) => {
   try {
     let dogs = await getAllInfo();
     let filtered = dogs.filter((e) => e.id == idRaza);
-    if(!filtered.length) throw Error("Sorry, we couldnt find details of the dog :c")
+    if (!filtered.length)
+      throw Error("Sorry, we couldnt find details of the dog :c");
     res.send(filtered);
   } catch (error) {
-    res
-      .status(404)
-      .send({ message: error.message});
+    res.status(404).send({ message: error.message });
   }
 });
 
@@ -45,6 +42,9 @@ router.post("/", async (req, res) => {
   let { name, image, height, weight, lifeTime, temperament } = req.body;
 
   try {
+    if (!name || !height || !weight || !temperament || !lifeTime) {
+      throw Error("Missing Data");
+    }
     const [instance, created] = await Dog.findOrCreate({
       where: {
         name,
@@ -66,12 +66,9 @@ router.post("/", async (req, res) => {
     instance.addTemperaments(dogTemp);
 
     if (created) return res.json({ message: "Dog created :D", instance });
-    else throw Error("Dog already exists")
-
+    else throw Error("Dog already exists");
   } catch (error) {
-    res
-      .status(404)
-      .json({ message: error.message});
+    res.status(404).json({ message: error.message });
   }
 });
 

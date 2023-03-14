@@ -106,7 +106,7 @@ export default function PostDog() {
             <form className={style.form} onSubmit={handleSubmit}>
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Name :</b>
+                  <b>Name: </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -128,7 +128,7 @@ export default function PostDog() {
               <hr />
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Minimum height (Cm) :</b>
+                  <b>Minimum height (Cm): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -151,7 +151,7 @@ export default function PostDog() {
 
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Maximum height (Cm) :</b>
+                  <b>Maximum height (Cm): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -174,7 +174,7 @@ export default function PostDog() {
 
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Minimum weight (Kg) :</b>
+                  <b>Minimum weight (Kg): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -197,7 +197,7 @@ export default function PostDog() {
 
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Maximum weight (Kg) :</b>
+                  <b>Maximum weight (Kg): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -220,7 +220,7 @@ export default function PostDog() {
 
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Minimum life Time (Y) :</b>
+                  <b>Minimum life Time (Y): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -243,7 +243,7 @@ export default function PostDog() {
 
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>Maximum life Time (Y) :</b>
+                  <b>Maximum life Time (Y): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -266,7 +266,7 @@ export default function PostDog() {
 
               <div className={style.inputContainer}>
                 <label className={style.label}>
-                  <b>image (URL):</b>
+                  <b>image (URL): </b>
                 </label>
                 <div className={style.inputWrapper}>
                   <input
@@ -362,7 +362,7 @@ c6.074-6.075,6.074-15.909,0-21.986L285.08,230.397z"
               weight={postedDog.instance.weight}
             />
             <p className={style.succesPostedP}>{postedDog.message}</p>
-            <Link to="/home" className={style.linkA}>
+            <Link to="/dogs" className={style.linkA}>
               <button>Go Home</button>
             </Link>
           </div>

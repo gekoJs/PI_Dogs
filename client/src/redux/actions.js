@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   GET_ALL_DOGS,
   LOADER,
@@ -14,7 +15,6 @@ import {
   //   DELETE_DOG,
 } from "./types";
 
-import axios from "axios";
 
 export const getAllDogs = () => async (dispatch) => {
   try {
