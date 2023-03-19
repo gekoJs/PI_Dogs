@@ -1,3 +1,4 @@
+// PRUEBAAA
 export const weightInputHandler = (input) => {
   const weight = input.map((e) => `${e}Kg`).join(" - ");
   return weight;
