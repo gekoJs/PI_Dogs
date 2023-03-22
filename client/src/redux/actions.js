@@ -12,13 +12,14 @@ import {
   FILTER_BY_WEIGHT,
   //   CLEAR_DETAIL,
     POST_DOG,
+    CLEAR_POSTED_DOG,
   //   DELETE_DOG,
 } from "./types";
 
 
 export const getAllDogs = () => async (dispatch) => {
   try {
-    await axios.get("http://localhost:3001/dogs").then((res) => {
+    await axios.get("/dogs").then((res) => {
       dispatch({
         type: GET_ALL_DOGS,
         payload: res.data,
@@ -34,7 +35,7 @@ export const getAllDogs = () => async (dispatch) => {
 
 export const getDogByName = (name) => async (dispatch) => {
   try {
-    await axios.get(`http://localhost:3001/dogs?name=${name}`).then((resp) => {
+    await axios.get(`/dogs?name=${name}`).then((resp) => {
       dispatch({
         type: GET_DOG_BY_NAME,
         payload: resp.data,
@@ -50,7 +51,7 @@ export const getDogByName = (name) => async (dispatch) => {
 
 export const getDogDetails = (id) => async (dispatch) => {
   try {
-    await axios.get(`http://localhost:3001/dogs/${id}`).then((resp) => {
+    await axios.get(`/dogs/${id}`).then((resp) => {
       dispatch({
         type: GET_DOG_DETAIL,
         payload: resp.data,
@@ -66,7 +67,7 @@ export const getDogDetails = (id) => async (dispatch) => {
 
 export const getAllTemperaments = () => async (dispatch) => {
   try {
-    await axios.get("http://localhost:3001/temperaments").then((resp) => {
+    await axios.get("/temperaments").then((resp) => {
       dispatch({
         type: GET_ALL_TEMPERAMENTS,
         payload: resp.data,
@@ -110,7 +111,7 @@ export function filterByWeight(payload) {
 
 export const postDog = (data) => async (dispatch) => {
   try {
-    const res = await axios.post("http://localhost:3001/dogs", data).then(resp=>{
+    const res = await axios.post("/dogs", data).then(resp=>{
       dispatch({
         type:POST_DOG,
         payload: resp.data
@@ -135,5 +136,11 @@ export const manageErr = (payload) => {
   return{
     type: MANAGE_ERROR,
     payload
+  }
+};
+
+export const clearPostedDog = () => {
+  return{
+    type: CLEAR_POSTED_DOG
   }
 }

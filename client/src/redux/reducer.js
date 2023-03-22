@@ -9,9 +9,8 @@ import {
   FILTER_BY_ORIGIN,
   FILTER_BY_NAME,
   FILTER_BY_WEIGHT,
-  //   CLEAR_DETAIL,
-    POST_DOG,
-  //   DELETE_DOG,
+  CLEAR_POSTED_DOG,
+  POST_DOG,
 } from "./types";
 
 const initialState = {
@@ -140,6 +139,11 @@ export default function rootReducer(state = initialState, action) {
         loader: false,
         error: action.payload,
       };
+    case CLEAR_POSTED_DOG:
+      return{
+        ...state,
+        postedDog:{}
+      }
     default:
       return {
         ...state,

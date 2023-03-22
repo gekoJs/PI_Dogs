@@ -7,7 +7,7 @@ import Error from "../../components/error/Error";
 import Footer from "../../components/footer/Footer";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getAllDogs, loaderHandler } from "../../redux/actions";
+import { clearPostedDog, getAllDogs, loaderHandler } from "../../redux/actions";
 
 import { useEffect, useState } from "react";
 
@@ -22,6 +22,9 @@ export default function Home() {
   let allDogs = useSelector((state) => state.allDogs);
   const loader = useSelector((state) => state.loader);
   const ups = useSelector((state) => state.error);
+  const postedDog = useSelector((state)=> state.postedDog)
+
+  Object.keys(postedDog).length && dispatch(clearPostedDog())
 
   // redux state-------------------------------
 
