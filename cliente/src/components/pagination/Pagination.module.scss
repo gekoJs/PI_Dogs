@@ -1,0 +1,72 @@
+@import "../../assets/sassVariables/variables.scss";
+
+.paginationContainer {
+  // background-color: aqua;
+  // width: inherit;
+  margin: auto;
+  padding: 10px 0 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+}
+.paginationLi {
+  margin: 8px;
+  button {
+    font-family: "Gloock";
+    padding: 8px;
+    border-radius: 100px;
+    border: none;
+    background: $purple;
+    color: $beige;
+    cursor: pointer;
+    transition: 0.2s;
+    &:hover {
+      background: $orange;
+      color: $purple;
+      transform: translateY(-5px);
+    }
+  }
+}
+
+.next {
+  margin: 0;
+  button {
+    border-radius: 0px 100px 100px 0px;
+    &:hover {
+      transform: translateY(0);
+    }
+  }
+}
+.prev {
+    margin: 0;
+    button {
+        border-radius: 100px 0px 0px 100px;
+        &:hover {
+          transform: translateY(0);
+        }
+  }
+}
+.dotsContainer {
+  width: fit-content;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:hover .dots {
+    background: $orange;
+  }
+}
+.dots {
+  margin: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background: $purple;
+  display: block;
+}
+.active button {
+  background: $orange;
+  color: $purple;
+  transform: scale(1.1);
+}

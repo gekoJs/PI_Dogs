@@ -1,0 +1,71 @@
+@import "../../assets/sassVariables/variables.scss";
+
+.container {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  letter-spacing: 1px;
+  font-family: "Gloock";
+  height: 100vh;
+  position: sticky;
+  top: 0px;
+}
+.wrapper{
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background: $beigeRGBA;
+  // position: fixed;
+  hr {
+    width: 80%;
+  }
+
+}
+.button {
+    margin-top: 80px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-size: 24px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: $purple;
+  color: $orange;
+  transition: transform .2s;
+  &:hover {
+    transform: translateY(-3px);
+    background-color: $maroon;
+    color: $beige;
+  }
+}
+.h3 {
+  font-size: 28px;
+  margin: 10px;
+  color: $purple;
+}
+.select {
+  cursor: pointer;
+  outline: none;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 10px;
+  background: $orange;
+  color: $purple;
+  border: none;
+  width: 80%;
+  margin: 20px;
+
+  &:hover {
+    background-color: $maroon;
+    color: $beige;
+  }
+  &:focus {
+    background-color: $maroon;
+    color: $beige;
+  }
+}

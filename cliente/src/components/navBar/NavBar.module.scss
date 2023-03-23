@@ -1,0 +1,55 @@
+@import "../../assets/sassVariables/variables.scss";
+.container{
+    width: 100%;
+    background: $purple;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 80px;
+    position: fixed;
+    z-index: 10;
+}
+.link{
+    h6{
+        font-size: 22px;
+    }
+    color: $orange;
+    position: absolute;
+    left: 12px;
+    font-family: "Gloock";
+    padding: 10px;
+    border-radius: 10px;
+    &:hover{
+        color: $purple;
+        background-color: $orange;
+    }
+}
+.form{
+    background-color: $purple;
+}
+.searchBar, .searchButton{
+    color: $purple;
+    font-family: "Gloock";
+    background-color: $orange;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 50px 0 0 50px;
+    outline: none;
+}
+.searchBar{
+    width: 500px;
+    &::placeholder{
+        color: $beigeRGBA;
+    }
+}
+.searchButton{
+    padding: 7px 23px;
+    border-radius: 0px 50px 50px 0px;
+    border: 5px solid $orange;
+    &:hover{
+        background: $purple;
+        color: $orange;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,10 @@
+@import "../../assets/sassVariables/variables.scss";
+
+.container{
+    background: linear-gradient(rgba(5,7,12,0.75),rgba(5,7,12,0.75)), url("../../assets/images/pawsBackground.jpeg") no-repeat center center fixed;
+    background-size: cover;
+}
+.flex{
+    display: flex;
+    position: relative;
+}

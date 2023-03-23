@@ -1,0 +1,41 @@
+@import "../../assets/sassVariables/variables.scss";
+.container{
+    height: 120px;
+    background: $purple;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 18px;
+    font-family: "Oswald";
+    font-weight: bold;
+    letter-spacing: 2px;
+    justify-content: space-around;
+}
+.textWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dots{
+    width: 5px;
+    height: 5px;
+    border-radius: 10px;
+    background-color: $beige;
+    transition: transform .2s;
+    &:hover{
+        background-color: $orange;
+    }
+}
+.h3{
+    cursor: default;
+    &:hover{
+        color: $orange;
+    }
+}
+.a{
+    margin: 10px;
+    transition: transform .2s;
+    &:hover{
+        transform: translateY(-5px);
+    }
+}

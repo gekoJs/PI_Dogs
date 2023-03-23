@@ -1,0 +1,58 @@
+@import "../../assets/sassVariables/variables.scss";
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.background {
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+
+  background: url("../../assets/images/dogBackground.png") no-repeat center;
+  background-size: cover;
+}
+
+.opacity {
+  z-index: 10;
+  width: inherit;
+  height: inherit;
+  position: absolute;
+
+  background-color: $purpleRGBA;
+}
+
+.content {
+  z-index: 100;
+  width: 100%;
+  height: inherit;
+  position: absolute;
+
+  font-family: "Gloock";
+  color: $beige;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  h1{
+    font-size: 6vw;
+  }
+  a{
+    button{
+      padding: 20px;
+      font-size: 2vw;
+      color: $beige;
+      background-color: $maroon;
+      border: none;
+      border-radius: 4px;
+      transition: .2s ;
+      &:hover{
+        background: $beige;
+        color: $maroon;
+        transform: translateY(-10px);
+      }
+    }
+  }
+}
+
